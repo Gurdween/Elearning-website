@@ -32,7 +32,7 @@ A modern, responsive website template for an online course or e-learning platfor
 1. **Clone the repository**
    ```bash
    https://github.com/Gurdween/Elearning-website.git
-   cd grandview plaza
+   cd learn sphere
    ```
    
 2. Open the `index.html` file in any modern browser.
