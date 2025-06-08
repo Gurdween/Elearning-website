@@ -66,9 +66,9 @@ To deploy this project via GitHub Pages:
 
 ## 🙌 Acknowledgements
 
-- Placeholder images by Unsplash
+- Placeholder images by [Unsplash](https://unsplash.com/)
 
-- Font icons by Font Awesome
+- Font icons by [Font Awesome](https://fontawesome.com/)
 
 - Certificate badge idea inspired by Coursera and Udemy UX
 
