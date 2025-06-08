@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSphere - Transform Your Future With Expert-Led Courses</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#818CF8'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .progress-container {
+            position: fixed;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+        }
+        .progress-bar {
+            height: 4px;
+            background: #4F46E5;
+            width: 0%;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .custom-checkbox {
+            position: relative;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .custom-checkbox.checked {
+            background-color: #4F46E5;
+            border-color: #4F46E5;
+        }
+        .custom-checkbox.checked::after {
+            content: '';
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            width: 5px;
+            height: 10px;
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .custom-switch-input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .custom-switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .custom-switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        .custom-switch-input:checked + .custom-switch-slider {
+            background-color: #4F46E5;
+        }
+        .custom-switch-input:checked + .custom-switch-slider:before {
+            transform: translateX(20px);
+        }
+        .custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #e5e7eb;
+            outline: none;
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4F46E5;
+            cursor: pointer;
+        }
+        .custom-range::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4F46E5;
+            cursor: pointer;
+            border: none;
+        }
+        .back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            cursor: pointer;
+            background-color: #4F46E5;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            transition: all 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #3730a3;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-40 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#home" class="flex items-center space-x-2">
+                <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full">
+                    <div class="w-6 h-6 flex items-center justify-center bg-white rounded-full">
+                        <div class="w-3 h-3 bg-primary rounded-full"></div>
+                    </div>
+                </div>
+                <span class="text-2xl font-['Pacifico'] text-gray-800">LearnSphere</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors">Home</a>
+                <a href="#courses" class="text-gray-700 hover:text-primary font-medium transition-colors">Courses</a>
+                <a href="#curriculum" class="text-gray-700 hover:text-primary font-medium transition-colors">Curriculum</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium transition-colors">Testimonials</a>
+                <a href="#get-started" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Get Started</a>
+            </nav>
+            <button class="md:hidden w-10 h-10 flex items-center justify-center" id="mobileMenuButton">
+                <i class="ri-menu-line text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white absolute w-full shadow-md" id="mobileMenu">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors py-2">Home</a>
+                <a href="#courses" class="text-gray-700 hover:text-primary font-medium transition-colors py-2">Courses</a>
+                <a href="#curriculum" class="text-gray-700 hover:text-primary font-medium transition-colors py-2">Curriculum</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-primary font-medium transition-colors py-2">Testimonials</a>
+                <a href="#get-started" class="bg-primary text-white px-5 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors text-center">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=diverse%20group%20of%20students%20in%20a%20modern%20digital%20learning%20environment%2C%20soft%20gradient%20background%20with%20blue%20and%20purple%20tones%2C%20clean%20and%20minimalist%20style%2C%20showing%20people%20using%20laptops%20and%20tablets%2C%20learning%20together%2C%20high-quality%20professional%20photo%20with%20soft%20lighting&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+        <div class="container mx-auto px-6 py-20 relative">
+            <div class="w-full md:w-1/2 lg:w-2/5">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">Transform Your Future With Expert-Led Courses</h1>
+                <p class="text-lg md:text-xl text-gray-700 mb-8">Unlock your potential with our comprehensive library of courses taught by industry experts. Learn at your own pace and achieve your goals.</p>
+                
+                <div class="relative mb-8">
+                    <input type="text" placeholder="Search for courses..." class="w-full py-3 pl-12 pr-4 border border-gray-300 !rounded-button focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary">
+                    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+                        <i class="ri-search-line"></i>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#courses" class="bg-primary text-white px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors text-center">Explore Courses</a>
+                    <a href="#get-started" class="bg-white text-primary border border-primary px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-gray-50 transition-colors text-center">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent"></div>
+    </section>
+
+    <!-- Featured Courses Section -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Courses</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Discover our most popular courses and start your learning journey today.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-4px]">
+                    <div class="relative">
+                        <img src="https://readdy.ai/api/search-image?query=professional%20data%20visualization%20dashboard%20with%20charts%20and%20graphs%2C%20clean%20modern%20interface%2C%20blue%20color%20scheme%2C%20business%20analytics%20concept%2C%20high%20quality%20professional%20photo&width=600&height=400&seq=2&orientation=landscape" alt="Data Science Fundamentals" class="w-full h-48 object-cover object-top">
+                        <div class="absolute top-4 left-4 bg-primary text-white text-xs font-medium px-2 py-1 rounded-full">Intermediate</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Data Science Fundamentals</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20Asian%20male%20professor%20with%20glasses%2C%20neutral%20background%2C%20friendly%20expression%2C%20high%20quality%20professional%20photo&width=100&height=100&seq=3&orientation=squarish" alt="Dr. Michael Chen" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-sm text-gray-700">Dr. Michael Chen</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-fill"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.8 (342 reviews)</span>
+                        </div>
+                        <div class="mb-4">
+                            <div class="h-2 w-full bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary rounded-full" style="width: 75%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-xs text-gray-500">75% complete</span>
+                                <span class="text-xs text-gray-500">12/16 lessons</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-gray-900">$89.99</span>
+                            <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-4px]">
+                    <div class="relative">
+                        <img src="https://readdy.ai/api/search-image?query=modern%20web%20development%20workspace%20with%20code%20on%20screen%2C%20clean%20desk%20setup%20with%20laptop%20and%20coffee%2C%20soft%20lighting%2C%20professional%20photo%20of%20programming%20environment&width=600&height=400&seq=4&orientation=landscape" alt="Full-Stack Web Development" class="w-full h-48 object-cover object-top">
+                        <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">Beginner</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Full-Stack Web Development</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20Black%20female%20tech%20professional%20with%20natural%20hair%2C%20neutral%20background%2C%20confident%20smile%2C%20high%20quality%20professional%20photo&width=100&height=100&seq=5&orientation=squarish" alt="Sarah Johnson" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-sm text-gray-700">Sarah Johnson</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-line"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.0 (189 reviews)</span>
+                        </div>
+                        <div class="mb-4">
+                            <div class="h-2 w-full bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary rounded-full" style="width: 30%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-xs text-gray-500">30% complete</span>
+                                <span class="text-xs text-gray-500">6/20 lessons</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-gray-900">$69.99</span>
+                            <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-4px]">
+                    <div class="relative">
+                        <img src="https://readdy.ai/api/search-image?query=digital%20marketing%20strategy%20meeting%20with%20team%20looking%20at%20analytics%20on%20screen%2C%20professional%20business%20setting%2C%20diverse%20team%20collaborating%2C%20high%20quality%20professional%20photo&width=600&height=400&seq=6&orientation=landscape" alt="Digital Marketing Mastery" class="w-full h-48 object-cover object-top">
+                        <div class="absolute top-4 left-4 bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded-full">Advanced</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Digital Marketing Mastery</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20Latina%20woman%20with%20shoulder-length%20hair%2C%20business%20attire%2C%20neutral%20background%2C%20confident%20expression%2C%20high%20quality%20professional%20photo&width=100&height=100&seq=7&orientation=squarish" alt="Elena Rodriguez" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-sm text-gray-700">Elena Rodriguez</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.9 (256 reviews)</span>
+                        </div>
+                        <div class="mb-4">
+                            <div class="h-2 w-full bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary rounded-full" style="width: 10%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-xs text-gray-500">10% complete</span>
+                                <span class="text-xs text-gray-500">2/18 lessons</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-gray-900">$129.99</span>
+                            <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-4px]">
+                    <div class="relative">
+                        <img src="https://readdy.ai/api/search-image?query=UX%2FUI%20design%20workspace%20with%20wireframes%20and%20prototypes%20on%20screen%2C%20modern%20design%20studio%20environment%2C%20creative%20workspace%20with%20tablet%20and%20sketches%2C%20high%20quality%20professional%20photo&width=600&height=400&seq=8&orientation=landscape" alt="UX/UI Design Principles" class="w-full h-48 object-cover object-top">
+                        <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">Beginner</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">UX/UI Design Principles</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20Indian%20male%20designer%20with%20modern%20glasses%2C%20neutral%20background%2C%20creative%20professional%20look%2C%20high%20quality%20professional%20photo&width=100&height=100&seq=9&orientation=squarish" alt="Raj Patel" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-sm text-gray-700">Raj Patel</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-fill"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.7 (203 reviews)</span>
+                        </div>
+                        <div class="mb-4">
+                            <div class="h-2 w-full bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary rounded-full" style="width: 0%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-xs text-gray-500">0% complete</span>
+                                <span class="text-xs text-gray-500">0/14 lessons</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-gray-900">$79.99</span>
+                            <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-4px]">
+                    <div class="relative">
+                        <img src="https://readdy.ai/api/search-image?query=machine%20learning%20AI%20concept%20with%20neural%20network%20visualization%2C%20futuristic%20technology%2C%20clean%20modern%20interface%20with%20code%20and%20data%20visualization%2C%20high%20quality%20professional%20photo&width=600&height=400&seq=10&orientation=landscape" alt="Machine Learning Fundamentals" class="w-full h-48 object-cover object-top">
+                        <div class="absolute top-4 left-4 bg-primary text-white text-xs font-medium px-2 py-1 rounded-full">Intermediate</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Machine Learning Fundamentals</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20white%20male%20professor%20with%20beard%2C%20neutral%20background%2C%20academic%20look%2C%20high%20quality%20professional%20photo&width=100&height=100&seq=11&orientation=squarish" alt="Dr. James Wilson" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-sm text-gray-700">Dr. James Wilson</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-line"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.2 (178 reviews)</span>
+                        </div>
+                        <div class="mb-4">
+                            <div class="h-2 w-full bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary rounded-full" style="width: 50%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-xs text-gray-500">50% complete</span>
+                                <span class="text-xs text-gray-500">8/16 lessons</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-gray-900">$99.99</span>
+                            <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:translate-y-[-4px]">
+                    <div class="relative">
+                        <img src="https://readdy.ai/api/search-image?query=financial%20analysis%20workspace%20with%20charts%20and%20financial%20documents%2C%20professional%20business%20setting%2C%20stock%20market%20data%20visualization%2C%20clean%20modern%20office%20environment%2C%20high%20quality%20professional%20photo&width=600&height=400&seq=12&orientation=landscape" alt="Financial Literacy 101" class="w-full h-48 object-cover object-top">
+                        <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-medium px-2 py-1 rounded-full">Beginner</div>
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-medium px-2 py-1 rounded-full">Free</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Financial Literacy 101</h3>
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 rounded-full overflow-hidden mr-3">
+                                <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20Black%20female%20financial%20expert%20in%20business%20attire%2C%20neutral%20background%2C%20professional%20confident%20expression%2C%20high%20quality%20professional%20photo&width=100&height=100&seq=13&orientation=squarish" alt="Michelle Thompson" class="w-full h-full object-cover">
+                            </div>
+                            <span class="text-sm text-gray-700">Michelle Thompson</span>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-fill"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.6 (412 reviews)</span>
+                        </div>
+                        <div class="mb-4">
+                            <div class="h-2 w-full bg-gray-200 rounded-full">
+                                <div class="h-2 bg-primary rounded-full" style="width: 25%"></div>
+                            </div>
+                            <div class="flex justify-between mt-1">
+                                <span class="text-xs text-gray-500">25% complete</span>
+                                <span class="text-xs text-gray-500">3/12 lessons</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-bold text-green-600">Free</span>
+                            <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap font-medium hover:bg-primary/90 transition-colors">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-primary font-medium hover:text-primary/80 transition-colors">
+                    View All Courses
+                    <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- Curriculum Preview Section -->
+    <section id="curriculum" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Curriculum Preview</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Explore our structured learning paths designed to take you from beginner to expert.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1">
+                    <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Learning Paths</h3>
+                        <ul class="space-y-4">
+                            <li>
+                                <button class="w-full flex items-center justify-between py-3 px-4 bg-primary text-white rounded-lg font-medium transition-colors" id="path1Btn">
+                                    <span>Data Science</span>
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full flex items-center justify-between py-3 px-4 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors" id="path2Btn">
+                                    <span>Web Development</span>
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full flex items-center justify-between py-3 px-4 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors" id="path3Btn">
+                                    <span>Digital Marketing</span>
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full flex items-center justify-between py-3 px-4 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors" id="path4Btn">
+                                    <span>UX/UI Design</span>
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="w-full flex items-center justify-between py-3 px-4 bg-white border border-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-100 transition-colors" id="path5Btn">
+                                    <span>Financial Education</span>
+                                    <i class="ri-arrow-right-s-line"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Your Achievements</h3>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="w-16 h-16 flex items-center justify-center bg-yellow-100 rounded-full relative" title="Python Basics">
+                                <i class="ri-code-s-slash-line text-yellow-600 text-2xl"></i>
+                                <div class="absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full">1</div>
+                            </div>
+                            <div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full relative" title="Data Analysis">
+                                <i class="ri-bar-chart-2-line text-blue-600 text-2xl"></i>
+                                <div class="absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full">2</div>
+                            </div>
+                            <div class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-full opacity-50" title="Machine Learning">
+                                <i class="ri-brain-line text-gray-400 text-2xl"></i>
+                            </div>
+                            <div class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-full opacity-50" title="Deep Learning">
+                                <i class="ri-ai-generate text-gray-400 text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <a href="#" class="text-primary font-medium hover:text-primary/80 transition-colors text-sm">View all achievements</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-2">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-bold text-gray-900">Data Science Path</h3>
+                            <a href="#" class="text-sm text-primary font-medium hover:text-primary/80 transition-colors">Download Syllabus</a>
+                        </div>
+                        
+                        <div class="relative pb-8 pl-8 border-l-2 border-gray-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 bg-primary rounded-full"></div>
+                            <div class="mb-6">
+                                <div class="flex items-center mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900">Python Fundamentals</h4>
+                                    <div class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Completed</div>
+                                </div>
+                                <p class="text-gray-700 mb-2">Learn the basics of Python programming language, data types, control structures, and functions.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="ri-time-line mr-2"></i>
+                                    <span>4 weeks • 16 lessons</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pb-8 pl-8 border-l-2 border-gray-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 bg-primary rounded-full"></div>
+                            <div class="mb-6">
+                                <div class="flex items-center mb-2">
+                                    <h4 class="text-lg font-bold text-gray-900">Data Analysis with Pandas</h4>
+                                    <div class="ml-3 px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">In Progress</div>
+                                </div>
+                                <p class="text-gray-700 mb-2">Master data manipulation, cleaning, and analysis using the powerful Pandas library.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="ri-time-line mr-2"></i>
+                                    <span>6 weeks • 24 lessons</span>
+                                </div>
+                                
+                                <div class="mt-4 bg-white rounded-lg p-4 border border-gray-200">
+                                    <h5 class="font-medium text-gray-900 mb-2">Sample Lesson: Data Visualization with Matplotlib</h5>
+                                    <p class="text-sm text-gray-700 mb-3">Learn how to create compelling visualizations to communicate your data insights effectively.</p>
+                                    <a href="#" class="inline-flex items-center text-primary text-sm font-medium hover:text-primary/80 transition-colors">
+                                        Preview Lesson
+                                        <i class="ri-play-circle-line ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pb-8 pl-8 border-l-2 border-gray-200">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 bg-gray-300 rounded-full"></div>
+                            <div class="mb-6">
+                                <h4 class="text-lg font-bold text-gray-700">Machine Learning Basics</h4>
+                                <p class="text-gray-600 mb-2">Understand the fundamentals of machine learning algorithms and their applications.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="ri-time-line mr-2"></i>
+                                    <span>8 weeks • 32 lessons</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative pl-8">
+                            <div class="absolute left-[-9px] top-0 w-4 h-4 bg-gray-300 rounded-full"></div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-700">Deep Learning & Neural Networks</h4>
+                                <p class="text-gray-600 mb-2">Dive into neural networks, deep learning frameworks, and advanced AI concepts.</p>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="ri-time-line mr-2"></i>
+                                    <span>10 weeks • 40 lessons</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Learning Achievement Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Track Your Progress</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Monitor your learning journey and earn certificates as you master new skills.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Your Learning Progress</h3>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center">
+                                <div class="relative w-24 h-24 mx-auto mb-3">
+                                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E5E7EB" stroke-width="3" stroke-dasharray="100, 100"/>
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4F46E5" stroke-width="3" stroke-dasharray="75, 100"/>
+                                        <text x="18" y="20.5" text-anchor="middle" fill="#4F46E5" font-size="8" font-weight="bold">75%</text>
+                                    </svg>
+                                </div>
+                                <h4 class="font-medium text-gray-900">Data Science</h4>
+                            </div>
+                            
+                            <div class="text-center">
+                                <div class="relative w-24 h-24 mx-auto mb-3">
+                                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E5E7EB" stroke-width="3" stroke-dasharray="100, 100"/>
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4F46E5" stroke-width="3" stroke-dasharray="30, 100"/>
+                                        <text x="18" y="20.5" text-anchor="middle" fill="#4F46E5" font-size="8" font-weight="bold">30%</text>
+                                    </svg>
+                                </div>
+                                <h4 class="font-medium text-gray-900">Web Development</h4>
+                            </div>
+                            
+                            <div class="text-center">
+                                <div class="relative w-24 h-24 mx-auto mb-3">
+                                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#E5E7EB" stroke-width="3" stroke-dasharray="100, 100"/>
+                                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4F46E5" stroke-width="3" stroke-dasharray="10, 100"/>
+                                        <text x="18" y="20.5" text-anchor="middle" fill="#4F46E5" font-size="8" font-weight="bold">10%</text>
+                                    </svg>
+                                </div>
+                                <h4 class="font-medium text-gray-900">Digital Marketing</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Weekly Learning Goal</span>
+                                    <span class="text-sm font-medium text-gray-700">5/7 hours</span>
+                                </div>
+                                <div class="h-2 w-full bg-gray-200 rounded-full">
+                                    <div class="h-2 bg-primary rounded-full" style="width: 71%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Courses Completed</span>
+                                    <span class="text-sm font-medium text-gray-700">3/12</span>
+                                </div>
+                                <div class="h-2 w-full bg-gray-200 rounded-full">
+                                    <div class="h-2 bg-primary rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm font-medium text-gray-700">Quizzes Passed</span>
+                                    <span class="text-sm font-medium text-gray-700">18/24</span>
+                                </div>
+                                <div class="h-2 w-full bg-gray-200 rounded-full">
+                                    <div class="h-2 bg-primary rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Your Achievements</h3>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 flex items-center">
+                                <div class="w-16 h-16 flex items-center justify-center bg-yellow-100 rounded-full mr-4">
+                                    <i class="ri-medal-line text-yellow-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 mb-1">Python Mastery</h4>
+                                    <p class="text-sm text-gray-600">Completed all Python courses</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 flex items-center">
+                                <div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mr-4">
+                                    <i class="ri-bar-chart-grouped-line text-blue-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 mb-1">Data Analyst</h4>
+                                    <p class="text-sm text-gray-600">Completed data analysis track</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 flex items-center">
+                                <div class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mr-4">
+                                    <i class="ri-calendar-check-line text-green-600 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 mb-1">7-Day Streak</h4>
+                                    <p class="text-sm text-gray-600">Learned for 7 consecutive days</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 flex items-center">
+                                <div class="w-16 h-16 flex items-center justify-center bg-purple-100 rounded-full mr-4 relative">
+                                    <i class="ri-graduation-cap-line text-purple-600 text-2xl"></i>
+                                    <div class="absolute -top-1 -right-1 w-6 h-6 flex items-center justify-center bg-primary text-white text-xs font-bold rounded-full">+1</div>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 mb-1">First Certificate</h4>
+                                    <p class="text-sm text-gray-600">Earned your first course certificate</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h4 class="font-medium text-gray-900 mb-4">Featured Certificate</h4>
+                            <div class="bg-gray-50 rounded-lg border border-gray-200 p-6 relative overflow-hidden">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16"></div>
+                                <div class="absolute bottom-0 left-0 w-24 h-24 bg-primary/10 rounded-full -ml-12 -mb-12"></div>
+                                
+                                <div class="relative">
+                                    <div class="flex items-center mb-4">
+                                        <div class="w-12 h-12 flex items-center justify-center bg-primary rounded-full mr-4">
+                                            <i class="ri-code-s-slash-line text-white text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-gray-900">Data Science Fundamentals</h3>
+                                            <p class="text-sm text-gray-600">Issued on June 2, 2025</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <p class="text-gray-700">This certifies that <span class="font-medium">Alex Morgan</span> has successfully completed the Data Science Fundamentals course.</p>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 flex items-center justify-center bg-primary rounded-full">
+                                                <div class="w-6 h-6 flex items-center justify-center bg-white rounded-full">
+                                                    <div class="w-3 h-3 bg-primary rounded-full"></div>
+                                                </div>
+                                            </div>
+                                            <span class="ml-2 text-lg font-['Pacifico'] text-gray-800">LearnSphere</span>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button class="bg-gray-200 text-gray-700 p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-300 transition-colors">
+                                                <i class="ri-download-line"></i>
+                                            </button>
+                                            <button class="bg-gray-200 text-gray-700 p-2 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-300 transition-colors">
+                                                <i class="ri-share-line"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">Hear from our community of learners who have transformed their careers through our courses.</p>
+            </div>
+            
+            <div class="relative">
+                <div class="flex overflow-hidden" id="testimonialSlider">
+                    <!-- Testimonial 1 -->
+                    <div class="min-w-full px-4">
+                        <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                                    <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20Asian%20female%20software%20engineer%2C%20neutral%20background%2C%20confident%20expression%2C%20high%20quality%20professional%20photo&width=200&height=200&seq=14&orientation=squarish" alt="Jennifer Lee" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">Jennifer Lee</h4>
+                                    <div class="flex items-center">
+                                        <p class="text-gray-600 mr-3">Software Engineer</p>
+                                        <div class="flex text-yellow-400">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <p class="text-gray-700 italic">"The Data Science course completely transformed my career. I went from being a junior developer to landing a role as a data scientist at a top tech company. The curriculum was comprehensive and the hands-on projects gave me real-world experience that I could showcase in interviews."</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Completed: <span class="font-medium">Data Science Fundamentals</span></p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full mr-2">
+                                        <i class="ri-medal-line text-blue-600"></i>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-700">Top Performer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="min-w-full px-4">
+                        <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                                    <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20middle-aged%20Black%20male%20marketing%20professional%2C%20neutral%20background%2C%20friendly%20smile%2C%20high%20quality%20professional%20photo&width=200&height=200&seq=15&orientation=squarish" alt="Marcus Johnson" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">Marcus Johnson</h4>
+                                    <div class="flex items-center">
+                                        <p class="text-gray-600 mr-3">Marketing Director</p>
+                                        <div class="flex text-yellow-400">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-half-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <p class="text-gray-700 italic">"I was skeptical about online learning at first, but LearnSphere changed my perspective. The Digital Marketing course was incredibly practical and up-to-date with the latest industry trends. I was able to implement strategies I learned immediately in my role, which led to a 40% increase in our conversion rates."</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Completed: <span class="font-medium">Digital Marketing Mastery</span></p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full mr-2">
+                                        <i class="ri-award-line text-green-600"></i>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-700">Course Ambassador</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="min-w-full px-4">
+                        <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                                    <img src="https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20white%20female%20UX%20designer%20with%20glasses%2C%20neutral%20background%2C%20creative%20professional%20look%2C%20high%20quality%20professional%20photo&width=200&height=200&seq=16&orientation=squarish" alt="Emma Wilson" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-gray-900">Emma Wilson</h4>
+                                    <div class="flex items-center">
+                                        <p class="text-gray-600 mr-3">UX Designer</p>
+                                        <div class="flex text-yellow-400">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <p class="text-gray-700 italic">"As someone transitioning careers, the UX/UI Design course gave me exactly what I needed to build a portfolio and land my first design role. The instructor feedback was invaluable, and the community of fellow students provided support and networking opportunities. I'm now working at a startup I love!"</p>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Completed: <span class="font-medium">UX/UI Design Principles</span></p>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 flex items-center justify-center bg-purple-100 rounded-full mr-2">
+                                        <i class="ri-user-star-line text-purple-600"></i>
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-700">Career Changer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Controls -->
+                <button class="absolute top-1/2 left-0 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-100 focus:outline-none z-10" id="prevBtn">
+                    <i class="ri-arrow-left-s-line text-xl"></i>
+                </button>
+                <button class="absolute top-1/2 right-0 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-700 hover:bg-gray-100 focus:outline-none z-10" id="nextBtn">
+                    <i class="ri-arrow-right-s-line text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Slider Dots -->
+            <div class="flex justify-center mt-8">
+                <button class="w-3 h-3 rounded-full bg-primary mx-1" data-index="0"></button>
+                <button class="w-3 h-3 rounded-full bg-gray-300 mx-1" data-index="1"></button>
+                <button class="w-3 h-3 rounded-full bg-gray-300 mx-1" data-index="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section id="get-started" class="py-20 bg-gradient-to-r from-primary to-secondary/90">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Start Your Learning Journey?</h2>
+                <p class="text-lg text-white/90 mb-8">Join thousands of students who are already transforming their careers with LearnSphere. Get started today with a free trial.</p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                    <input type="email" placeholder="Enter your email" class="w-full sm:w-64 py-3 px-4 border-none !rounded-button focus:outline-none focus:ring-2 focus:ring-white/50">
+                    <button class="w-full sm:w-auto bg-white text-primary px-6 py-3 !rounded-button whitespace-nowrap font-medium hover:bg-gray-100 transition-colors">Begin Learning</button>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 text-white mb-12">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-1">50,000+</div>
+                        <div class="text-white/80">Students Enrolled</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-1">200+</div>
+                        <div class="text-white/80">Expert Courses</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold mb-1">92%</div>
+                        <div class="text-white/80">Success Rate</div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-white hover:text-white/80 transition-colors">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-facebook-fill text-xl"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="text-white hover:text-white/80 transition-colors">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-twitter-x-fill text-xl"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="text-white hover:text-white/80 transition-colors">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-linkedin-fill text-xl"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="text-white hover:text-white/80 transition-colors">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-instagram-fill text-xl"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 flex items-center justify-center bg-white rounded-full">
+                            <div class="w-6 h-6 flex items-center justify-center bg-primary rounded-full">
+                                <div class="w-3 h-3 bg-white rounded-full"></div>
+                            </div>
+                        </div>
+                        <span class="text-2xl font-['Pacifico'] text-white">LearnSphere</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Transform your future with expert-led courses designed to help you achieve your personal and professional goals.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-facebook-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-twitter-x-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-linkedin-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-instagram-fill"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Explore</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#courses" class="text-gray-400 hover:text-white transition-colors">Courses</a></li>
+                        <li><a href="#curriculum" class="text-gray-400 hover:text-white transition-colors">Curriculum</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Categories</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Data Science</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Digital Marketing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">UX/UI Design</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Business & Finance</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">All Categories</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Support</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li>
+                            <div class="flex space-x-3">
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-visa-fill text-xl"></i>
+                                </div>
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-mastercard-fill text-xl"></i>
+                                </div>
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-paypal-fill text-xl"></i>
+                                </div>
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-apple-fill text-xl"></i>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">© 2025 LearnSphere. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+    <!-- Toast Notification -->
+    <div class="fixed bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center max-w-xs z-50 transform translate-y-20 opacity-0 transition-all duration-300" id="toast">
+        <div class="w-10 h-10 flex items-center justify-center bg-green-100 rounded-full mr-3">
+            <i class="ri-check-line text-green-600"></i>
+        </div>
+        <div>
+            <h4 class="font-medium text-gray-900">Achievement Unlocked!</h4>
+            <p class="text-sm text-gray-600">You've earned a new badge.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script id="navbarScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            // Handle navbar scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.remove('shadow-sm');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.add('shadow-sm');
+                }
+            });
+            
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenuButton.innerHTML = '<i class="ri-close-line text-xl"></i>';
+                } else {
+                    mobileMenuButton.innerHTML = '<i class="ri-menu-line text-xl"></i>';
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.innerHTML = '<i class="ri-menu-line text-xl"></i>';
+                });
+            });
+        });
+    </script>
+
+    <script id="scrollScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.getElementById('progressBar');
+            const backToTop = document.getElementById('backToTop');
+            
+            // Update progress bar
+            window.addEventListener('scroll', function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + '%';
+                
+                // Show/hide back to top button
+                if (winScroll > 300) {
+                    backToTop.style.display = 'block';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Back to top button
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script id="testimonialSliderScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.getElementById('testimonialSlider');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('[data-index]');
+            
+            let currentIndex = 0;
+            const slideCount = slider.children.length;
+            let autoplayInterval;
+            
+            // Function to update slider position
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-primary');
+                    } else {
+                        dot.classList.remove('bg-primary');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
+            }
+            
+            // Next slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateSlider();
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateSlider();
+            }
+            
+            // Set up click events
+            nextBtn.addEventListener('click', function() {
+                nextSlide();
+                resetAutoplay();
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                prevSlide();
+                resetAutoplay();
+            });
+            
+            // Set up dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    currentIndex = parseInt(this.getAttribute('data-index'));
+                    updateSlider();
+                    resetAutoplay();
+                });
+            });
+            
+            // Autoplay
+            function startAutoplay() {
+                autoplayInterval = setInterval(nextSlide, 5000);
+            }
+            
+            function resetAutoplay() {
+                clearInterval(autoplayInterval);
+                startAutoplay();
+            }
+            
+            // Initialize autoplay
+            startAutoplay();
+            
+            // Pause autoplay on hover
+            slider.addEventListener('mouseenter', function() {
+                clearInterval(autoplayInterval);
+            });
+            
+            slider.addEventListener('mouseleave', function() {
+                startAutoplay();
+            });
+            
+            // Handle touch events for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slider.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            slider.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    nextSlide();
+                    resetAutoplay();
+                }
+                if (touchEndX > touchStartX + 50) {
+                    prevSlide();
+                    resetAutoplay();
+                }
+            }
+        });
+    </script>
+
+    <script id="curriculumScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const pathButtons = document.querySelectorAll('[id$="Btn"]');
+            
+            // Set default active button
+            const defaultActiveButton = document.getElementById('path1Btn');
+            
+            // Add click event to all path buttons
+            pathButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    pathButtons.forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-white', 'border', 'border-gray-200', 'text-gray-700', 'hover:bg-gray-100');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.remove('bg-white', 'border', 'border-gray-200', 'text-gray-700', 'hover:bg-gray-100');
+                    this.classList.add('bg-primary', 'text-white');
+                    
+                    // Show toast notification
+                    showToast();
+                });
+            });
+        });
+    </script>
+
+    <script id="toastScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const toast = document.getElementById('toast');
+            
+            // Function to show toast
+            window.showToast = function() {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+                
+                // Hide toast after 3 seconds
+                setTimeout(function() {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 3000);
+            };
+            
+            // Show toast after 5 seconds of page load
+            setTimeout(showToast, 5000);
+        });
+    </script>
+
+    <script id="customControlsScript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Custom checkbox functionality
+            const checkboxes = document.querySelectorAll('.custom-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                    const input = this.previousElementSibling;
+                    if (input && input.type === 'checkbox') {
+                        input.checked = !input.checked;
+                    }
+                });
+            });
+            
+            // Custom switch functionality
+            const switches = document.querySelectorAll('.custom-switch-input');
+            switches.forEach(switchInput => {
+                switchInput.addEventListener('change', function() {
+                    // Any additional functionality can be added here
+                });
+            });
+            
+            // Custom range functionality
+            const ranges = document.querySelectorAll('.custom-range');
+            ranges.forEach(range => {
+                range.addEventListener('input', function() {
+                    // Any additional functionality can be added here
+                });
+            });
+        });
+    </script>
+</body>
+</html>
